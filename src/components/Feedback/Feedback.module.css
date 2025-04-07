@@ -1,0 +1,17 @@
+.feedbackList {
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.feedbackListItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 50%;
+  padding: 5px;
+  background-color: rgba(6, 54, 130, 0.745);
+  border-radius: 6px;
+}

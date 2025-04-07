@@ -1,0 +1,30 @@
+.optionsList {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.optionsListItem {
+}
+.optionsBtn {
+  color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: rgba(6, 54, 130, 0.745);
+  border-color: transparent;
+  border-radius: 6px;
+  box-shadow: 4px 4px 4px red;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1); */
+  &:hover {
+    background-color: rgba(6, 32, 118, 0.793);
+    box-shadow: 4px 4px 4px yellow;
+  }
+  &:active {
+    box-shadow: 4px 4px 4px yellowgreen;
+  }
+}
