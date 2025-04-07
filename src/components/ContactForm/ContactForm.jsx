@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { nanoid } from "nanoid";
-
+import s from "./ContactForm.module.css";
 const ContactForm = ({ addContact }) => {
   const formik = useFormik({
     initialValues: {
@@ -19,10 +19,13 @@ const ContactForm = ({ addContact }) => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className={s.form} onSubmit={formik.handleSubmit}>
       <div>
-        <label htmlFor="name">Name</label>
+        <label className={s.formLabel} htmlFor="name">
+          Name
+        </label>
         <input
+          className={s.formInput}
           id="name"
           name="name"
           type="text"
@@ -31,8 +34,11 @@ const ContactForm = ({ addContact }) => {
         />
       </div>
       <div>
-        <label htmlFor="number">Number</label>
+        <label className={s.formLabel} htmlFor="number">
+          Number
+        </label>
         <input
+          className={s.formInput}
           id="number"
           name="number"
           type="tel"
@@ -40,7 +46,9 @@ const ContactForm = ({ addContact }) => {
           value={formik.values.number}
         />
       </div>
-      <button type="submit">Add contact</button>
+      <button className={s.formBtn} type="submit">
+        Add contact
+      </button>
     </form>
   );
 };
