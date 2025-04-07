@@ -1,7 +1,6 @@
 import React from "react";
 
 const Contact = ({ id, name, number, onDelete }) => {
-  console.log();
   return (
     <div>
       <p>{name}</p>

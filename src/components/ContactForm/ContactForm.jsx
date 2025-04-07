@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { nanoid } from "nanoid";
 
-const ContactForm = ({ addContact, newContact }) => {
+const ContactForm = ({ addContact }) => {
   const formik = useFormik({
     initialValues: {
       name: "",

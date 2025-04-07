@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import Container from "./components/Container/Container";
@@ -12,7 +12,21 @@ const INITIAL_CONTACTS = [
 ];
 
 const App = () => {
-  const [contactsData, setContacts] = useState(INITIAL_CONTACTS);
+  const [contactsData, setContacts] = useState(() => {
+    try {
+      return (
+        JSON.parse(localStorage.getItem("contacts-data")) || INITIAL_CONTACTS
+      );
+    } catch (error) {
+      console.log(error);
+      return INITIAL_CONTACTS;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("contacts-data", JSON.stringify(contactsData));
+  }, [contactsData]);
+
   const [searchData, setSearchData] = useState("");
 
   const addContact = (newContact) => {
@@ -33,7 +47,7 @@ const App = () => {
   return (
     <Container>
       <h1>Phonebook</h1>
-      <ContactForm addContact={addContact} newContact={contactsData} />
+      <ContactForm addContact={addContact} />
       <SearchBox searchData={searchData} onSearchInput={handleSearchInput} />
       <ContactList contactsData={findContact} onDeleteContact={deleteContact} />
     </Container>
