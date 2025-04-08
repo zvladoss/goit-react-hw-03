@@ -1,56 +1,54 @@
-import { useFormik } from "formik";
+import { Field, Form, Formik, useFormik } from "formik";
 import { nanoid } from "nanoid";
 import s from "./ContactForm.module.css";
-const ContactForm = ({ addContact }) => {
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      number: "",
-    },
-    onSubmit: (values, { resetForm }) => {
-      const newContact = {
-        id: nanoid(),
-        name: values.name,
-        number: values.number,
-      };
+import * as Yup from "yup";
+import FormInput from "../FormInput/FormInput";
+const ContactFormCopy = ({ addContact }) => {
+  const handleSubmit = (values, options) => {
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    };
 
-      addContact(newContact);
-      resetForm();
-    },
+    addContact(newContact);
+    options.resetForm();
+  };
+
+  const initialValues = {
+    name: "",
+    number: "",
+  };
+  const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+  const nu = /(?:\+|\d)[\d\-\(\) ]{9,}\d/g;
+  const contactSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "To short!")
+      .max(50, "To long!")
+      .required("Required!"),
+    number: Yup.string()
+      .matches(nu, "Is not tel")
+      .min(13, "Use full format")
+      .required("Required!"),
   });
+
   return (
-    <form className={s.form} onSubmit={formik.handleSubmit}>
-      <div>
-        <label className={s.formLabel} htmlFor="name">
-          Name
-        </label>
-        <input
-          className={s.formInput}
-          id="name"
-          name="name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-      </div>
-      <div>
-        <label className={s.formLabel} htmlFor="number">
-          Number
-        </label>
-        <input
-          className={s.formInput}
-          id="number"
-          name="number"
-          type="tel"
-          onChange={formik.handleChange}
-          value={formik.values.number}
-        />
-      </div>
-      <button className={s.formBtn} type="submit">
-        Add contact
-      </button>
-    </form>
+    <div className={s.formWrapper}>
+      <Formik
+        validationSchema={contactSchema}
+        onSubmit={handleSubmit}
+        initialValues={initialValues}
+      >
+        <Form>
+          <FormInput name="name" s={s} label="Name" />
+          <FormInput name="number" s={s} label="Number" />
+          <button className={s.formBtn} type="submit">
+            Add contact
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 
-export default ContactForm;
+export default ContactFormCopy;

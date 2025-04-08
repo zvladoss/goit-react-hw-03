@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import Container from "./components/Container/Container";
 import SearchBox from "./components/SearchBox/SearchBox";
+import ContactForm from "./components/ContactForm/ContactForm";
 
 const INITIAL_CONTACTS = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -26,12 +26,13 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("contacts-data", JSON.stringify(contactsData));
   }, [contactsData]);
-
+  console.log(localStorage.getItem("contacts-data"));
   const [searchData, setSearchData] = useState("");
 
   const addContact = (newContact) => {
     setContacts((prevContacts) => [...prevContacts, newContact]);
   };
+
   const handleSearchInput = (event) => {
     setSearchData(event.target.value);
   };
