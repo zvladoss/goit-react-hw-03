@@ -23,12 +23,12 @@ const ContactFormCopy = ({ addContact }) => {
   const nu = /(?:\+|\d)[\d\-\(\) ]{9,}\d/g;
   const contactSchema = Yup.object().shape({
     name: Yup.string()
-      .min(3, "To short!")
-      .max(50, "To long!")
+      .min(3, "Too short!")
+      .max(50, "Too long!")
       .required("Required!"),
     number: Yup.string()
-      .matches(nu, "Is not tel")
-      .min(13, "Use full format")
+      .matches(nu, "It's not tel!")
+      .min(13, "Invalid format!")
       .required("Required!"),
   });
 

@@ -1,5 +1,4 @@
 import { ErrorMessage, Field } from "formik";
-
 const FormInput = ({ label, name, s, type = "text" }) => {
   return (
     <label>
